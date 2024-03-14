@@ -51,6 +51,9 @@ const Index = () => {
           <Tr>
             <Th>Name</Th>
             <Th>Age</Th>
+            <Th>Gender</Th>
+            <Th>Address</Th>
+            <Th>Phone</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -59,6 +62,9 @@ const Index = () => {
             <Tr key={patient.id}>
               <Td>{patient.name}</Td>
               <Td>{patient.age}</Td>
+              <Td>{patient.gender}</Td>
+              <Td>{patient.address}</Td>
+              <Td>{patient.phone}</Td>
               <Td>
                 <IconButton
                   icon={<FaEdit />}
@@ -94,6 +100,9 @@ const Index = () => {
 const PatientForm = ({ patient, onSubmit }) => {
   const [name, setName] = useState(patient?.name || "");
   const [age, setAge] = useState(patient?.age || "");
+  const [gender, setGender] = useState(patient?.gender || "");
+  const [address, setAddress] = useState(patient?.address || "");
+  const [phone, setPhone] = useState(patient?.phone || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,6 +110,9 @@ const PatientForm = ({ patient, onSubmit }) => {
       id: patient?.id || Date.now(),
       name,
       age,
+      gender,
+      address,
+      phone,
     });
     setName("");
     setAge("");
@@ -115,6 +127,18 @@ const PatientForm = ({ patient, onSubmit }) => {
       <FormControl mb={4}>
         <FormLabel>Age</FormLabel>
         <Input type="number" value={age} onChange={(e) => setAge(e.target.value)} required />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel>Gender</FormLabel>
+        <Input type="text" value={gender} onChange={(e) => setGender(e.target.value)} required />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel>Address</FormLabel>
+        <Input type="text" value={address} onChange={(e) => setAddress(e.target.value)} required />
+      </FormControl>
+      <FormControl mb={4}>
+        <FormLabel>Phone</FormLabel>
+        <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
       </FormControl>
       <Button type="submit" colorScheme="blue">
         {patient ? "Update" : "Add"}
